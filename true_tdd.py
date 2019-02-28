@@ -4,20 +4,31 @@ def multiply(a,b):
     return a * b
 # return a boolean of whether every value in a given list is positive
 def all_positive(l):
-    
+    for i in l:
+        if i < 0:
+            return False
+    return True
 # return the average value of a given list
 def average(l):
-    pass
+    return sum(l)/len(l)
 # add the largest and smallest values in a list and return the sum
 def add_min_max(l):
-    pass
+    max_value = max(l)
+    min_value = min(l)
+    if not max_value:
+        return 0
+    elif not min_value:
+        return 0
+    else:
+        return (max_value + min_value)
+
 class MainTest(unittest.TestCase):
     
     def test_multiply(self):
         self.assertEqual(multiply(5,4), 20)
         self.assertEqual(multiply(0,100), 0)
         self.assertEqual(multiply(-5,5), -25)
-        self.assertEqual(multiply(-5,-5), -25)
+        self.assertEqual(multiply(-5,-5), 25)
     
     def test_all_positive(self):
         self.assertTrue(all_positive([1,2,3,4]))
@@ -33,8 +44,8 @@ class MainTest(unittest.TestCase):
         self.assertRaises(ZeroDivisionError, average, [])
 
     def test_add_minmax(self):
-        self.assertEqual(average([1,2,3,4,5]), 6)
-        self.assertEqual(average([0,0,0,0]), 0)
-        self.assertEqual(average([10,5,0,-5]), 5)
+        self.assertEqual(add_min_max([1,2,3,4,5]), 6)
+        self.assertEqual(add_min_max([0,0,0,0]), 0)
+        self.assertEqual(add_min_max([10,5,0,-5]), 5)
         # Does this give us a hint as to how a specific case should be handled by our function?
-        self.assertIsNone(average([]))
+        self.assertIsNone(add_min_max([]))
